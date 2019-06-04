@@ -13,7 +13,7 @@ class Requests(Resource):
     def get(self):
         conn = db_connect.connect() # connect to database
         query = conn.execute("select * from http_input_logs") # This line performs query and returns json result
-        return {[i[0] for i in query.cursor.fetchall()]} 
+        return query.cursor.fetchall() 
     
     def post(self):
         conn = db_connect.connect()
