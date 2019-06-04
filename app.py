@@ -21,7 +21,7 @@ class Requests(Resource):
         
         http_request = request.json
         
-        query = conn.execute("insert into http_input_logs values('{0}')".format(str(http_request)))
+        query = conn.execute("insert into http_input_logs values('{0}')".format(dumps(http_request)))
         return {'status':'success'}
 
     
