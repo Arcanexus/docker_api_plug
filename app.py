@@ -17,8 +17,7 @@ class Requests(Resource):
     
     def post(self):
         conn = db_connect.connect()
-        print(request.json)
-        
+       
         http_request = request.get_json(force=True)
         
         query = conn.execute("insert into http_input_logs values('{0}')".format(dumps(http_request)))
