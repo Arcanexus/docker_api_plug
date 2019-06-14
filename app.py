@@ -17,14 +17,23 @@ class Requests(Resource):
     
     def post(self):
         conn = db_connect.connect()
-       
-        http_request = request.get_json(force=True)
+        # print(request.json)
         
-        query = conn.execute("insert into http_input_logs values('{0}')".format(dumps(http_request)))
+        http_request = request.get_json(force=True)
+        print(dumps(http_request))
+        query = conn.execute("insert into http_input_logs values(?)", (dumps(http_request)))
         return {'status':'success'}
 
-    
+
+class ResetDB(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute("delete from http_input_logs")
+        query = conn.execute("vacuum")
+        return {'status':'success'}
+
 api.add_resource(Requests, '/') # Route_1
+api.add_resource(ResetDB, '/reset')
 
 if __name__ == '__main__':
-     app.run(debug=True, host='0.0.0.0', port='5002')
+     app.run(debug=True, port='5002', host='127.0.0.1')
