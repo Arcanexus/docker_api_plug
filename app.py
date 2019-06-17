@@ -36,4 +36,4 @@ api.add_resource(Requests, '/') # Route_1
 api.add_resource(ResetDB, '/reset')
 
 if __name__ == '__main__':
-     app.run(debug=True, port='5002', host='127.0.0.1')
+     app.run(debug=True, port='5002', host='0.0.0.0')
